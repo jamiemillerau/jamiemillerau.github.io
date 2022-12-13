@@ -1,0 +1,30 @@
+<rss version="2.0">
+<channel>
+<atom:link href="https://jamiemiller.au/rss.xml" rel="self" type="application/rss+xml"/>
+<title>Jamie Miller</title>
+<link>https://jamiemiller.au</link>
+<description>Jamie Miller's Website</description>
+<language>en-us</language>
+<item>
+<titled>Automating Backups With Rclone</title>
+<pubDate>Sun, 27 Nov 2022 00:00:00 +0800</pubDate>
+<link>https://jamiemiller.au/rclone.html</link>
+<guid>https://jamiemiller.au/rclone.html</guid>
+<description>Automating Backups With Rclone</description>
+</item>
+<item>
+<titled>SSL/TLS Certificate Guide</title>
+<pubDate>Wed, 23 Nov 2022 00:00:00 +0800</pubDate>
+<link>https://jamiemiller.au/ssl.html</link>
+<guid>https://jamiemiller.au/ssl.html</guid>
+<description>SSL/TLS Certificate Guide</description>
+</item>
+<item>
+<titled>SSH Hardening Guide</title>
+<pubDate>Thu, 03 Mar 2022 00:00:00 +0800</pubDate>
+<link>https://jamiemiller.au/ssh.html</link>
+<guid>https://jamiemiller.au/ssh.html</guid>
+<description>SSH Hardening Guide</description>
+</item>
+</channel>
+</rss>

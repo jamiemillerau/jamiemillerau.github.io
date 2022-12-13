@@ -1,0 +1,69 @@
+html {
+	margin: auto;
+	max-width: 720px;
+	height: 100%;
+}
+body {
+	background-color: black;
+	color: white;
+	font-family: monospace;
+	font-size: 1em;
+}
+main {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+a {
+	text-decoration: underline;
+	color: white;
+}
+a:hover {
+	color: #999;
+}
+pre {
+	overflow-x: auto;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+code {
+	background-color: #222;
+	padding: 2px;
+}
+.title {
+	font-size: 3em;
+	margin: 5px;
+}
+.date {
+	color: #555;
+}
+.code {
+	background-color: #222;
+	padding: 10px;
+}
+.cat-title {
+	color: #999;
+}
+.cat-container {
+display:grid;padding:0
+}
+@media only screen and (min-width:320px){
+.cat-container {grid-template-columns:auto}
+}
+@media only screen and (min-width:600px){
+.cat-container {grid-template-columns:auto auto}
+}
+@media only screen and (min-width:800px){
+.cat-container {grid-template-columns:auto auto auto}
+}
+.cat-item {
+clear:both
+}
+a.cat:link {
+background-color:#222;border-radius:6px;padding:9px;margin:6px;text-align:center;display:block;font-size:1em;text-decoration:none;font-weight:bold;
+}
+a.cat:hover {
+color: black
+}
+.cat-item a.cat:hover {
+background-color:#fff
+}

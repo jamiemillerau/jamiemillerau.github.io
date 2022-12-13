@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Cheatsheet</title>
+<meta charset="utf-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<link rel="stylesheet" href="style.css">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS">
+</head>
+<body>
+<main>
+<center>
+<a href="/" style="text-decoration:none"><h1 style="font-size:3em; margin:5px;">Jamie Miller</h1></a>
+<a href="https://git.jamiemiller.au/jamie" target="blank"><img style="margin: 5px;" src="github.png"></a>        
+<a href="mailto:contact@jamiemiller.au"><img style="margin: 5px;" src="at.png"></a>    
+<a href="/"><img style="margin: 5px;" src="linkedin.png"></a>
+</center>
+<h2>Cheatsheet</h2>
+<hr>
+<br>
+<center>
+Under Construction
+</center>
+<h2>CLI</h2>
+<div class="cat-container">
+<div class="cat-item"><a href="#tmux" class="cat">tmux</a></div>
+<div class="cat-item"><a href="#vim" class="cat">vim</a></div>
+<div class="cat-item"><a href="#sed" class="cat">sed</a></div>
+<div class="cat-item"><a href="#tar" class="cat">tar</a></div>
+<div class="cat-item"><a href="#git" class="cat">git</a></div>
+<div class="cat-item"><a href="#ffmpeg" class="cat">ffmpeg</a></div>
+</div>
+<h2>Linux</h2>
+<div class="cat-container">
+<div class="cat-item"><a href="#sed" class="cat">sed</a></div>
+<div class="cat-item"><a href="#curl" class="cat">curl</a></div>
+<div class="cat-item"><a href="#cron" class="cat">cron</a></div>
+<div class="cat-item"><a href="#grep" class="cat">grep</a></div>
+</div>
+<h2>Servers</h2>
+<div class="cat-container">
+<div class="cat-item"><a href="#nginx" class="cat">nginx</a></div>
+<div class="cat-item"><a href="#ssh" class="cat">ssh</a></div>
+<div class="cat-item"><a href="#server" class="cat">server</a></div>
+</div>
+<h2>Devops</h2>
+<div class="cat-container">
+<div class="cat-item"><a href="#docker" class="cat">docker</a></div>
+<div class="cat-item"><a href="#kubernetes" class="cat">kubernetes</a></div>
+<div class="cat-item"><a href="#chef" class="cat">chef</a></div>
+</div>
+<h2>Languages</h2>
+<div class="cat-container">
+<div class="cat-item"><a href="#bash" class="cat">bash</a></div>
+<div class="cat-item"><a href="#python" class="cat">python</a></div>
+<div class="cat-item"><a href="#regex" class="cat">regex</a></div>
+</div>
+<br><br>
+<!--
+<h3 id="nginx">Nginx</h3>
+Remove .html extenstion for web pages served by nginx.
+<pre class="code">
+location / {
+    if ($request_uri ~ ^/(.*)\.html) {
+        return 302 /$1;
+    }
+    try_files $uri $uri.html $uri/ =404;
+}
+</pre>
+-->
+</main>
+</body>
+</html>
