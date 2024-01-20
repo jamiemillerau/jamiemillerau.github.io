@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css"/>
+    <title>Jamie Miller</title>
+    <meta name="description" content="Personal website of Jamie Miller.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+<body>
+<div class="main">
+    <center>
+    <a href="/" style="text-decoration: none; color: white;"><h1>Jamie Miller</h1></a>
+    <a href="https://github.com/jamiemillerau" target="_blank"><img src="/github.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/linkedin.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/at.png" class="socials"></a>
+    </center>
+    <br>
+<h2>SSL/TLS Certificate Guide</h2>
+<hr>
+<br>
+This guide assumes a domain is already pointing to the IP address of a webserver running debian/ubuntu with shell access.
+<br>
+<br>
+Install certbot
+<pre class="code">
+$ sudo apt update && sudo apt upgrade -y && sudo apt install certbot -y
+</pre>
+Get a Let's Encrypt certificate
+<pre class="code">
+certbot certonly --standalone --agree-tos --no-eff-email --preferred-challenges http -m your@email.com -d example.com
+</pre>
+Add the certificates to your webservers configuration file, for example nginx
+<pre class="code">
+$ vim /etc/nginx/sites-available/website.conf
+
+server {
+    listen 80;
+    listen              443 ssl;
+
+    server_name example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ...
+
+</pre>
+Confirm the nginx config is valid with <code>nginx -t</code>
+<br><br><br>
+Recommended: Set up auto-renewal
+<br><br>
+Create a directory for webroot challenges and add the location in the http section of the nginx config file
+<pre class="code">
+$ mkdir -p /var/lib/letsencrypt
+$ vim /etc/nginx/sites-available/website.conf
+
+    location ~ /\.well-known/acme-challenge {
+         root /var/lib/letsencrypt/;
+    }
+
+$ nginx -t
+</pre>
+Test the webroot method works
+<pre class="code">
+$ certbot renew --cert-name example.com --webroot -w /var/lib/letsencrypt/ --dry-run --post-hook 'systemctl reload nginx'
+</pre>
+Add it to the daily cron and test
+<pre class="code">
+$  echo '#!/bin/sh
+certbot renew --cert-name example.com --webroot -w /var/lib/letsencrypt/ --post-hook "systemctl reload nginx"' > /etc/cron.daily/renew-website-cert
+$ chmod +x /etc/cron.daily/renew-website-cert
+$ run-parts --test /etc/cron.daily
+</pre>
+<br>
+</main>
+</body>
+</html>

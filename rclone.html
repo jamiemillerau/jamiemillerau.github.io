@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css"/>
+    <title>Jamie Miller</title>
+    <meta name="description" content="Personal website of Jamie Miller.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+<body>
+<div class="main">
+    <center>
+    <a href="/" style="text-decoration: none; color: white;"><h1>Jamie Miller</h1></a>
+    <a href="https://github.com/jamiemillerau" target="_blank"><img src="/github.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/linkedin.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/at.png" class="socials"></a>
+    </center>
+    <br>
+<h2>Automating Backups With Rclone</h2>
+<hr>
+<br>
+Install Rclone
+<pre class="code">
+$ sudo apt update && sudo upgrade -y && sudo apt install rclone -y
+</pre>
+Depending on what <a href="https://rclone.org/docs/">cloud provider</a> is being used, a browser may be needed to login for OAuth, so it's common to generate the config file on your host machine and then copy the config file to the server/headless machine via sftp/rsync etc.
+<br>
+<br>
+On your host machine install <a href="https://rclone.org/">Rclone</a> and run <code>rclone config</code>. This will guide you through an interactive setup process which is different for each provider so check the <a href="https://rclone.org/docs/">docs</a> depending on what cloud provider is being used.
+<br>
+<br>
+OneDrive example:
+<pre class="code">
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q> n
+name> remote
+Type of storage to configure.
+Enter a string value. Press Enter for the default ("").
+Choose a number from below, or type in your own value
+[snip]
+XX / Microsoft OneDrive
+   \ "onedrive"
+[snip]
+Storage> onedrive
+Microsoft App Client Id
+Leave blank normally.
+Enter a string value. Press Enter for the default ("").
+client_id>
+Microsoft App Client Secret
+Leave blank normally.
+Enter a string value. Press Enter for the default ("").
+client_secret>
+Edit advanced config? (y/n)
+y) Yes
+n) No
+y/n> n
+Remote config
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+y) Yes
+n) No
+y/n> y
+If your browser doesn't open automatically go to the following link: http://127.0.0.1:53682/auth
+Log in and authorize rclone for access
+Waiting for code...
+Got code
+Choose a number from below, or type in an existing value
+ 1 / OneDrive Personal or Business
+   \ "onedrive"
+ 2 / Sharepoint site
+   \ "sharepoint"
+ 3 / Type in driveID
+   \ "driveid"
+ 4 / Type in SiteID
+   \ "siteid"
+ 5 / Search a Sharepoint site
+   \ "search"
+Your choice> 1
+Found 1 drives, please select the one you want to use:
+0: OneDrive (business) id=b!Eqwertyuiopasdfghjklzxcvbnm-7mnbvcxzlkjhgfdsapoiuytrewqk
+Chose drive to use:> 0
+Found drive 'root' of type 'business', URL: https://org-my.sharepoint.com/personal/you/Documents
+Is that okay?
+y) Yes
+n) No
+y/n> y
+--------------------
+[remote]
+type = onedrive
+token = {"access_token":"youraccesstoken","token_type":"Bearer","refresh_token":"yourrefreshtoken","expiry":"2018-08-26T22:39:52.486512262+08:00"}
+drive_id = b!Eqwertyuiopasdfghjklzxcvbnm-7mnbvcxzlkjhgfdsapoiuytrewqk
+drive_type = business
+--------------------
+y) Yes this is OK
+e) Edit this remote
+d) Delete this remote
+y/e/d> y
+</pre>
+After the config file has been generated copy it to the server/remote machine. To find the correct location for the config file run <code>rclone config file</code>.
+<br>
+<br>
+Once the config file is in place, backing up to cloud storage is as easy as <code>rclone copy file.txt remote:backups</code>.
+<br>
+<br>
+An example script for automation:
+<pre class="code">
+#!/bin/bash
+tar -czvf /home/user/backups/files-$(date '+Y-%m-%d').tar.gz /home/user/files
+rclone copy /home/user/backups remote:backups
+</pre>
+And make a cronjob to run the script <code>crontab -e</code>.
+<pre class="code">
+* 1 * * * /home/user/bin/backup.sh
+</pre>
+<br>
+</main>
+</body>
+</html>

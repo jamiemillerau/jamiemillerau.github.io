@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css"/>
+    <title>Jamie Miller</title>
+    <meta name="description" content="Personal website of Jamie Miller.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+<body>
+<div class="main">
+    <center>
+    <a href="/" style="text-decoration: none; color: white;"><h1>Jamie Miller</h1></a>
+    <a href="https://github.com/jamiemillerau" target="_blank"><img src="/github.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/linkedin.png" class="socials"></a>
+    <a href="/" target="_blank"><img src="/at.png" class="socials"></a>
+    </center>
+    <br>
+<h2>SSH Hardening Guide</h2>
+<hr>
+<br>
+Generate a key pair on the host system and copy the public key to the remote machine
+<pre class="code">
+$ ssh-keygen   # Assuming there is no keypair already on the host machine
+$ ssh-copy-id user@remotehost.com
+</pre>
+Log into the remote host, disable password authentication and reload ssh
+<pre class="code">
+$ ssh user@remotehost.com
+$ sudo vim /etc/ssh/sshd_config
+
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no
+
+$ sudo systemctl reload sshd
+</pre>
+Or use sed
+<pre class="code">
+$ sudo sed -i 's/^.*PasswordAuthentication yes/PasswordAuthentication no/i' /etc/ssh/sshd_config
+$ sudo sed -i 's/^.*ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/i' /etc/ssh/sshd_config
+$ sudo sed -i 's/^.*UsePAM yes/UsePAM no/i' /etc/ssh/sshd_config
+</pre>
+Install and configure fail2ban
+<pre class="code">
+$ sudo apt update -y && sudo apt upgrade -y && sudo apt install fail2ban -y
+$ sudo systemctl enable fail2ban
+$ cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
+$ cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+</pre>
+Configuring jail.local is up to personal perference. Usually <code>ignoreip</code>, <code>bantime</code>, <code>findtime</code> and <code>maxretry</code> will be tweaked.
+<br>
+</main>
+</body>
+</html>
