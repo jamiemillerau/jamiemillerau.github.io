@@ -760,6 +760,20 @@ echo "test" > index.html
 # add, commit, push
 git add -all
 git commit -m "initial commit"
+git push -u origin main
+
+# push existing repo
+git remote add origin https://github.com/username/repo.git
+git branch -M main
+git push -u origin main
+
+# create new repo
+echo "# title" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/username/repo.git
 git push -u origin main</div></pre>
       </div>
     <div class="container">
