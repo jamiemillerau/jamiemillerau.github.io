@@ -41,6 +41,17 @@ $ sudo sed -i 's/^.*PasswordAuthentication yes/PasswordAuthentication no/i' /etc
 $ sudo sed -i 's/^.*ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/i' /etc/ssh/sshd_config
 $ sudo sed -i 's/^.*UsePAM yes/UsePAM no/i' /etc/ssh/sshd_config
 </pre>
+ASD recommended security configurations (<a href="https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism">ISM-0484</a>):
+<div class="code">only listen on the required interfaces (ListenAddress xxx.xxx.xxx.xxx)
+have a suitable login banner (Banner x)
+have a login authentication timeout of no more than 60 seconds (LoginGraceTime 60)
+disable host-based authentication (HostbasedAuthentication no)
+disable rhosts-based authentication (IgnoreRhosts yes)
+disable the ability to login directly as root (PermitRootLogin no)
+disable empty passwords (PermitEmptyPasswords no)
+disable connection forwarding (AllowTCPForwarding no)
+disable gateway ports (GatewayPorts no)
+disable X11 forwarding (X11Forwarding no)</div>
 Install and configure fail2ban
 <pre class="code">
 $ sudo apt update -y && sudo apt upgrade -y && sudo apt install fail2ban -y
